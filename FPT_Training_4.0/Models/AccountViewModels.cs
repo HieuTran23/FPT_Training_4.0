@@ -87,6 +87,33 @@ namespace FPT_Training_4._0.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        public string FullName { get; set; }
+        public string Contact { get; set; }
+        public string Description { get; set; }
+        public string Address { get; set; }
+        public string City { get; set; }
+        public string Country { get; set; }
+    }
+
+    public class UserEdit
+    {
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+        [Required]
+        [Display(Name = "UserName")]
+        public string UserName { get; set; }
+        public string FullName { get; set; }
+        public string Contact { get; set; }
+        public string Description { get; set; }
+        public string Address { get; set; }
+        public string City { get; set; }
+        public string Country { get; set; }
+
+        public bool EmailConfirmed { get; set; }
     }
 
     public class ResetPasswordViewModel

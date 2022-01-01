@@ -9,6 +9,9 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using FPT_Training_4._0.Models;
+using System.Dynamic;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Net;
 
 namespace FPT_Training_4._0.Controllers
 {
@@ -199,7 +202,7 @@ namespace FPT_Training_4._0.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, FullName = model.FullName, Contact = model.Contact, Description = model.Description, Address = model.Address, City = model.City, Country = model.Country };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -218,8 +221,110 @@ namespace FPT_Training_4._0.Controllers
         }
 
         //
-        //GET: /Account/Delete
+        //GET: /Account/Detail Account
+        public ActionResult DetailAccount(string email)
+        {
+            if (email == null)
+            {
+                return View("Error");
+            }
+            var appUser = UserManager.FindByEmail(email);
+            UserEdit user = new UserEdit();
+            user.Address = appUser.Address;
+            user.City = appUser.City;
+            user.Country = appUser.Country;
+            user.Description = appUser.Description;
+            user.FullName = appUser.FullName;
+            user.Email = appUser.Email;
+            user.Contact = appUser.Contact;
+            user.UserName = appUser.UserName;
+            return View(user);
+        }
 
+        //GET: /Account/Edit User
+        public ActionResult EditUser(string email)
+        {
+            if (email == null)
+            {
+                return View("Error");
+            }
+            ApplicationUser appUser = new ApplicationUser();
+            var appUser1 = UserManager.FindByEmail(email);
+            UserEdit user = new UserEdit();
+            user.Address = appUser1.Address;
+            user.City = appUser1.City;
+            user.Country = appUser1.Country;
+            user.Description = appUser1.Description;
+            user.FullName = appUser1.FullName;
+            user.Email = appUser1.Email;
+            user.UserName = appUser1.UserName;
+            user.Contact = appUser1.Contact;
+            return View(user);
+        }
+
+        //POST:/Account/Edit User
+        [HttpPost]
+        public async Task<ActionResult> EditUser(UserEdit model)
+        {
+
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var store = new UserStore<ApplicationUser>(new ApplicationDbContext());
+            var manager = new UserManager<ApplicationUser>(store);
+            var currentUser = manager.FindByEmail(model.Email);
+            currentUser.Address = model.Address;
+            currentUser.City = model.City;
+            currentUser.Country = model.Country;
+            currentUser.Description = model.Description;
+            currentUser.FullName = model.FullName;
+            currentUser.Email = model.Email;
+            currentUser.UserName = model.UserName;
+            currentUser.Contact = model.Contact;
+            currentUser.EmailConfirmed = model.EmailConfirmed;
+            await manager.UpdateAsync(currentUser);
+            var ctx = store.Context;
+            ctx.SaveChanges();
+            TempData["msg"] = "Profile Changes Saved !";
+            return RedirectToAction("DetailAccount", new { email = model.Email });
+        }
+
+        //GET: /Account/Delete/
+        public ActionResult DeleteUser(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var user = context.Users.Find(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            context.Users.Remove(user);
+            context.SaveChanges();
+            return RedirectToAction("UsersWithRoles", "ManageUser");
+        }
+
+
+        //public async Task<ActionResult> UserDeleteConfirmed(string id)
+        //{
+        //    var user = await UserManager.FindByIdAsync(id);
+
+        //    var result = await UserManager.DeleteAsync(user);
+        //    if (result.Succeeded)
+        //    {
+        //        TempData["UserDeleted"] = "User Successfully Deleted";
+        //        return RedirectToAction("UsersWithRoles","ManageUser");
+        //    }
+        //    else
+        //    {
+        //        TempData["UserDeleted"] = "Error Deleting User";
+        //        return RedirectToAction("UsersWithRoles", "ManageUser");
+        //    }
+        //}
 
         //
         // GET: /Account/ConfirmEmail

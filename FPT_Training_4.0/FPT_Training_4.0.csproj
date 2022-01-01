@@ -178,6 +178,23 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202112311753112_InitialCreate.cs" />
+    <Compile Include="Migrations\202112311753112_InitialCreate.Designer.cs">
+      <DependentUpon>202112311753112_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202201010511096_extend_IdentityUser.cs" />
+    <Compile Include="Migrations\202201010511096_extend_IdentityUser.Designer.cs">
+      <DependentUpon>202201010511096_extend_IdentityUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202201010519436_extend_IdentityUser1.cs" />
+    <Compile Include="Migrations\202201010519436_extend_IdentityUser1.Designer.cs">
+      <DependentUpon>202201010519436_extend_IdentityUser1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202201010526268_extend_IdentityUser2.cs" />
+    <Compile Include="Migrations\202201010526268_extend_IdentityUser2.Designer.cs">
+      <DependentUpon>202201010526268_extend_IdentityUser2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
@@ -906,13 +923,17 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Role\Index.cshtml" />
-    <Content Include="Views\Role\Create.cshtml" />
     <Content Include="Views\ManageUser\UsersWithRoles.cshtml" />
     <Content Include="Views\Account\Create.cshtml" />
     <Content Include="Views\CourseType\Index.cshtml" />
     <Content Include="Views\CourseType\Create.cshtml" />
     <Content Include="Views\CourseType\Edit.cshtml" />
     <Content Include="Views\CourseType\Delete.cshtml" />
+    <Content Include="Views\Account\DetailAccount.cshtml" />
+    <Content Include="Views\Account\EditUser.cshtml" />
+    <Content Include="Views\Account\DeleteUser.cshtml" />
+    <Content Include="Views\Role\Create.cshtml" />
+    <Content Include="Views\Role\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -929,6 +950,20 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202112311753112_InitialCreate.resx">
+      <DependentUpon>202112311753112_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201010511096_extend_IdentityUser.resx">
+      <DependentUpon>202201010511096_extend_IdentityUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201010519436_extend_IdentityUser1.resx">
+      <DependentUpon>202201010519436_extend_IdentityUser1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201010526268_extend_IdentityUser2.resx">
+      <DependentUpon>202201010526268_extend_IdentityUser2.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

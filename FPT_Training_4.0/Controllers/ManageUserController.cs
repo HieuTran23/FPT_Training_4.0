@@ -1,7 +1,10 @@
 ﻿using FPT_Training_4._0.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -29,6 +32,7 @@ namespace FPT_Training_4._0.Controllers
                                       UserId = user.Id,
                                       Username = user.UserName,
                                       Email = user.Email,
+                                      FullName = user.FullName,
                                       RoleNames = (from userRole in user.Roles
                                                    join role in context.Roles on userRole.RoleId
                                                    equals role.Id
@@ -39,6 +43,7 @@ namespace FPT_Training_4._0.Controllers
                                       UserId = p.UserId,
                                       Username = p.Username,
                                       Email = p.Email,
+                                      FullName = p.FullName,
                                       Role = string.Join(",", p.RoleNames)
                                   });
             return View(usersWithRoles);

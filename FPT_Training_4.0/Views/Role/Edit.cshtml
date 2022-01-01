@@ -1,6 +1,6 @@
 ﻿@model Microsoft.AspNet.Identity.EntityFramework.IdentityRole
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
 }
 
@@ -25,10 +25,10 @@
     <div class="clearfix">
         <div class="pull-left">
             <h4 class="text-blue h4">Role</h4>
-            <p class="mb-30">Create New Role</p>
+            <p class="mb-30">Edit Role</p>
         </div>
     </div>
-    @using (Html.BeginForm("Create", "Role", FormMethod.Post))
+    @using (Html.BeginForm("Edit", "Role", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary("", new { @class = "text-danger" })
@@ -40,10 +40,8 @@
         </div>
         <div class="form-group row">
             <div class="col-sm-12" style="display:flex; justify-content:flex-end">
-                <input type="submit" class="btn btn-primary" value="Create Role">
+                <input type="submit" class="btn btn-primary" value="Edit Role">
             </div>
         </div>
     }
 </div>
-
-

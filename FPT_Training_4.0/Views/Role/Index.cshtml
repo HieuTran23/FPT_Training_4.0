@@ -1,33 +1,62 @@
 ﻿@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>
 @{
     ViewBag.Title = "Add Role";
+    Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
 }
-<table style=" background-color:#FFFFFF; border: dashed 3px #6D7B8D; padding: 5px;width: 99%;table-layout:fixed;" cellpadding="6" cellspacing="6">
-    <tr style="height: 30px; background-color:#336699 ; color:#FFFFFF ;border: solid 1px #659EC7;">
-        <td align="center" colspan="2">
-            <h2> Create User Roles</h2>
-        </td>
 
-    </tr>
+<div class="page-header">
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="title">
+                <h4>DataTable</h4>
+            </div>
+            <nav aria-label="breadcrumb" role="navigation">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Admin")">Dashboard</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">@ViewBag.Title</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
 
-    <tr>
-        <td>
-            <table id="tbrole" style="width:100%; border:dotted 1px; background-color:gainsboro; padding-left:10px;">
-
+<div class="card-box mb-30">
+    <div class="pd-20">
+        <h4 class="text-blue h4">User</h4>
+        <p class="mb-0">
+            You can't find the role
+            <a class="text-primary" href="@Url.Action("Create","Role")">
+                Create new role
+            </a>
+        </p>
+    </div>
+    <div class="pb-20">
+        <table class="data-table table stripe hover nowrap">
+            <thead>
+                <tr>
+                    <th class="table-plus">Role Name</th>
+                    <th class="datatable-nosort">Action</th>
+                </tr>
+            </thead>
+            <tbody>
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td style="width:100%; border:dotted 1px;">
-                            @item.Name
+                        <td class="table-plus">@item.Name</td>
+                        <td>
+                            <div class="dropdown">
+                                <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                    <i class="dw dw-more"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                    <a class="dropdown-item" href="@Url.Action("Edit","Role",new { id = item.Id })"><i class="dw dw-edit2"></i> Edit</a>
+                                    <a class="dropdown-item" href="@Url.Action("Delete","Role",new { id = item.Id })"><i class="dw dw-delete-3"></i> Delete</a>
+                                </div>
+                            </div>
                         </td>
                     </tr>
-}
-            </table>
-        </td>
-        <td align="right" style="color:#FFFFFF;padding-right:10;">
-
-
-            <h3>   @Html.ActionLink("Click to Create New Role", "Create", "Role") </h3>
-        </td>
-    </tr>
-</table>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
