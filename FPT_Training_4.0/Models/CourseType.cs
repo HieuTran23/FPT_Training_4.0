@@ -17,6 +17,7 @@ namespace FPT_Training_4._0.Models
         [Required]
         public string TypeName { get; set; }
         [Required]
+        [StringLength(200)]
         public string Description { get; set; }
         [Required]  
         public DateTime CreateDate { get; set; }
