@@ -16,6 +16,7 @@ namespace FPT_Training_4._0.Controllers
         // GET: CourseType
         public ActionResult Index()
         {
+            
             return View(db.courseTypes.ToList());
         }
 
