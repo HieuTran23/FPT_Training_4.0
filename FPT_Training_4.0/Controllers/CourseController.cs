@@ -1,49 +1,54 @@
 ﻿using FPT_Training_4._0.Models;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Configuration;
+using System.Data.SqlClient;
+using System.Data;
+using System.Net;
+using System.Data.Entity;
 
 namespace FPT_Training_4._0.Controllers
 {
-    public class CourseTypeController : Controller
+    public class CourseController : Controller
     {
-        // GET: CourseType
         private ApplicationDbContext db = new ApplicationDbContext();
-        // GET: CourseType
+        // GET: Course
         public ActionResult Index()
         {
-            
-            return View(db.courseTypes.ToList());
+            return View(db.Courses.ToList());
         }
 
         public ActionResult Create()
         {
-            return View("Create");
+            ViewBag.CourseType = new SelectList(db.courseTypes.ToList(), "TypeName", "TypeName") ;
+
+            return View();
         }
-        [HttpPost]
+        [HttpPost]  
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TypeName,Description,CreateDate")] CourseType course)
+        public ActionResult Create([Bind(Include = "CourseType,Name,Description,DateBegin,DateEnd")] Course course)
         {
             if (ModelState.IsValid)
             {
-                db.courseTypes.Add(course);
+                db.Courses.Add(course);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.CourseType = new SelectList(db.courseTypes.ToList(), "TypeName", "TypeName");
             return View(course);
 
         }
         public ActionResult Edit(int? id)
         {
+            ViewBag.CourseType = new SelectList(db.courseTypes.ToList(), "TypeName", "TypeName");
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CourseType course = db.courseTypes.Find(id);
+            Course course = db.Courses.Find(id);
             if (course == null)
             {
                 return HttpNotFound();
@@ -52,7 +57,7 @@ namespace FPT_Training_4._0.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,TypeName,Description,CreateDate")] CourseType course)
+        public ActionResult Edit([Bind(Include = "Id,CourseType,Name,Description,DateBegin,DateEnd")] Course course)
         {
             if (ModelState.IsValid)
             {
@@ -60,6 +65,7 @@ namespace FPT_Training_4._0.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.CourseType = new SelectList(db.courseTypes.ToList(), "TypeName", "TypeName");
             return View(course);
         }
         public ActionResult Delete(int? id)
@@ -68,7 +74,7 @@ namespace FPT_Training_4._0.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CourseType course = db.courseTypes.Find(id);
+            Course course = db.Courses.Find(id);
             if (course == null)
             {
                 return HttpNotFound();
@@ -81,8 +87,8 @@ namespace FPT_Training_4._0.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            CourseType course = db.courseTypes.Find(id);
-            db.courseTypes.Remove(course);
+            Course course = db.Courses.Find(id);
+            db.Courses.Remove(course);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
