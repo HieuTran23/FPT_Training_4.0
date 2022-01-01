@@ -195,6 +195,10 @@
     <Compile Include="Migrations\202201010526268_extend_IdentityUser2.Designer.cs">
       <DependentUpon>202201010526268_extend_IdentityUser2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202201011634120_Courses.cs" />
+    <Compile Include="Migrations\202201011634120_Courses.Designer.cs">
+      <DependentUpon>202201011634120_Courses.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -936,11 +940,10 @@
     <Content Include="Views\Account\DeleteUser.cshtml" />
     <Content Include="Views\Role\Create.cshtml" />
     <Content Include="Views\Role\Edit.cshtml" />
-
-    <Content Include="Views\Course\Index.cshtml" />
     <Content Include="Views\Course\Create.cshtml" />
-    <Content Include="Views\Course\Edit.cshtml" />
     <Content Include="Views\Course\Delete.cshtml" />
+    <Content Include="Views\Course\Edit.cshtml" />
+    <Content Include="Views\Course\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -970,6 +973,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202201010526268_extend_IdentityUser2.resx">
       <DependentUpon>202201010526268_extend_IdentityUser2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201011634120_Courses.resx">
+      <DependentUpon>202201011634120_Courses.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
