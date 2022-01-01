@@ -931,18 +931,16 @@
     <Content Include="Views\CourseType\Create.cshtml" />
     <Content Include="Views\CourseType\Edit.cshtml" />
     <Content Include="Views\CourseType\Delete.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\Account\DetailAccount.cshtml" />
     <Content Include="Views\Account\EditUser.cshtml" />
     <Content Include="Views\Account\DeleteUser.cshtml" />
     <Content Include="Views\Role\Create.cshtml" />
     <Content Include="Views\Role\Edit.cshtml" />
-=======
+
     <Content Include="Views\Course\Index.cshtml" />
     <Content Include="Views\Course\Create.cshtml" />
     <Content Include="Views\Course\Edit.cshtml" />
     <Content Include="Views\Course\Delete.cshtml" />
->>>>>>> 6096c87dc57201b0067235447c349c35078fbfa6
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
