@@ -12,6 +12,7 @@ namespace FPT_Training_4._0.Models
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

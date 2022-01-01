@@ -1,0 +1,43 @@
+﻿@model IEnumerable<FPT_Training_4._0.Models.UserRoleViewModel>
+@{
+    ViewBag.Title = "UsersWithRoles";
+    Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
+}
+
+<div class="card-box mb-30">
+    <div class="pd-20">
+        <h4 class="text-blue h4">User</h4>
+        <p class="mb-0">
+            You can't find the user
+            <a class="text-primary" href="@Url.Action("Create","Account")">
+                Create new user
+            </a>
+        </p>
+    </div>
+    <div class="pb-20">
+        <table class="data-table table stripe hover nowrap">
+            <thead>
+                <tr>
+                    <th class="table-plus datatable-nosort">UserName</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th class="datatable-nosort">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td class="table-plus">@user.Username</td>
+                        <td>@user.Email</td>
+                        <td>@user.Role</td>
+                        <td>
+                                <a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
