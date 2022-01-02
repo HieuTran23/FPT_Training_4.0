@@ -226,8 +226,8 @@
                             <span class="micon dw dw-edit2"></span><span class="mtext">Course</span>
                         </a>
                         <ul class="submenu">
-                            <li><a href="@Url.Action("Index", "CourseType")">Users</a></li>
-                            <li><a href="@Url.Action("Index", "Course")">User roles</a></li>
+                            <li><a href="@Url.Action("Index", "CourseType")">Course Type</a></li>
+                            <li><a href="@Url.Action("Index", "Courses")">Course</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -237,6 +237,7 @@
     <div class="mobile-menu-overlay"></div>
     <div class="main-container">
         <div class="pd-ltr-20">
+            @Html.Partial("_Notifications")
             @RenderBody()
         </div>
     </div>

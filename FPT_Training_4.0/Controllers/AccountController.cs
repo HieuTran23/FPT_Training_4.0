@@ -12,6 +12,7 @@ using FPT_Training_4._0.Models;
 using System.Dynamic;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Net;
+using FPT_Training_4._0.Extensions;
 
 namespace FPT_Training_4._0.Controllers
 {
@@ -209,6 +210,7 @@ namespace FPT_Training_4._0.Controllers
                     //Assign Role to user Here       
                     await this.UserManager.AddToRoleAsync(user.Id, model.UserRoles);
                     //Ends Here     
+                    this.AddNotification("Create Success", NotificationType.SUCCESS);
                     return RedirectToAction("UsersWithRoles", "ManageUser");
                 }
                 
@@ -216,7 +218,8 @@ namespace FPT_Training_4._0.Controllers
             }
             ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin"))
                                             .ToList(), "Name", "Name");
-            // If we got this far, something failed, redisplay form    
+            // If we got this far, something failed, redisplay form
+            this.AddNotification("Create Fail", NotificationType.ERROR);
             return View(model);
         }
 
@@ -259,6 +262,7 @@ namespace FPT_Training_4._0.Controllers
             user.Email = appUser1.Email;
             user.UserName = appUser1.UserName;
             user.Contact = appUser1.Contact;
+
             return View(user);
         }
 
@@ -288,6 +292,7 @@ namespace FPT_Training_4._0.Controllers
             var ctx = store.Context;
             ctx.SaveChanges();
             TempData["msg"] = "Profile Changes Saved !";
+            this.AddNotification("Edit Success", NotificationType.SUCCESS);
             return RedirectToAction("DetailAccount", new { email = model.Email });
         }
 
@@ -305,6 +310,7 @@ namespace FPT_Training_4._0.Controllers
             }
             context.Users.Remove(user);
             context.SaveChanges();
+            this.AddNotification("Edit Success", NotificationType.SUCCESS);
             return RedirectToAction("UsersWithRoles", "ManageUser");
         }
 

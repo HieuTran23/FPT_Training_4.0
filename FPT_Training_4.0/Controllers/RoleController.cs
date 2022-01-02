@@ -1,4 +1,5 @@
-﻿using FPT_Training_4._0.Models;
+﻿using FPT_Training_4._0.Extensions;
+using FPT_Training_4._0.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
@@ -36,9 +37,15 @@ namespace FPT_Training_4._0.Controllers
         [HttpPost]
         public ActionResult Create(IdentityRole Role)
         {
-            context.Roles.Add(Role);
-            context.SaveChanges();
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                context.Roles.Add(Role);
+                context.SaveChanges();
+                this.AddNotification("Create success", NotificationType.SUCCESS);
+                return RedirectToAction("Index");
+            }
+            this.AddNotification("Create Fail", NotificationType.ERROR);
+            return View("Create");
         }
         //
         // Role/Edit
@@ -64,10 +71,12 @@ namespace FPT_Training_4._0.Controllers
         {
             if (!ModelState.IsValid)
             {
+                this.AddNotification("Edit Fail", NotificationType.ERROR);
                 return View(role);
             }
             context.Entry(role).State = EntityState.Modified;
             context.SaveChanges();
+            this.AddNotification("Edit success", NotificationType.SUCCESS);
             return RedirectToAction("Index");
         }
 
@@ -85,6 +94,7 @@ namespace FPT_Training_4._0.Controllers
             }
             context.Roles.Remove(role);
             context.SaveChanges();
+            this.AddNotification("Delete success", NotificationType.SUCCESS);
             return RedirectToAction("Index");
         }
     }

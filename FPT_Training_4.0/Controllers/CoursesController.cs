@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using FPT_Training_4._0.Extensions;
 using FPT_Training_4._0.Models;
 
 namespace FPT_Training_4._0.Controllers
@@ -53,9 +54,11 @@ namespace FPT_Training_4._0.Controllers
             {
                 db.Courses.Add(course);
                 db.SaveChanges();
+                this.AddNotification("Create Success", NotificationType.SUCCESS);
                 return RedirectToAction("Index");
             }
             ViewBag.CourseType = new SelectList(db.courseTypes.ToList(), "TypeName", "TypeName");
+            this.AddNotification("Create Fail", NotificationType.ERROR);
             return View(course);
         }
 
@@ -86,9 +89,11 @@ namespace FPT_Training_4._0.Controllers
             {
                 db.Entry(course).State = EntityState.Modified;
                 db.SaveChanges();
+                this.AddNotification("Edit Success", NotificationType.SUCCESS);
                 return RedirectToAction("Index");
             }
             ViewBag.CourseType = new SelectList(db.courseTypes.ToList(), "TypeName", "TypeName");
+            this.AddNotification("Edit Fail", NotificationType.ERROR);
             return View(course);
         }
 
@@ -115,6 +120,7 @@ namespace FPT_Training_4._0.Controllers
             Course course = db.Courses.Find(id);
             db.Courses.Remove(course);
             db.SaveChanges();
+            this.AddNotification("Delete Success", NotificationType.SUCCESS);
             return RedirectToAction("Index");
         }
 

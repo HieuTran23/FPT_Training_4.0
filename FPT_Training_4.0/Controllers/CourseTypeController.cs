@@ -1,4 +1,5 @@
-﻿using FPT_Training_4._0.Models;
+﻿using FPT_Training_4._0.Extensions;
+using FPT_Training_4._0.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -31,8 +32,10 @@ namespace FPT_Training_4._0.Controllers
             {
                 db.courseTypes.Add(course);
                 db.SaveChanges();
+                this.AddNotification("Create success", NotificationType.SUCCESS);
                 return RedirectToAction("Index");
             }
+            this.AddNotification("Create Fail", NotificationType.ERROR);
             return View(course);
 
         }
@@ -57,8 +60,10 @@ namespace FPT_Training_4._0.Controllers
             {
                 db.Entry(course).State = EntityState.Modified;
                 db.SaveChanges();
+                this.AddNotification("Edit Success", NotificationType.SUCCESS);
                 return RedirectToAction("Index");
             }
+            this.AddNotification("Edit Fail", NotificationType.ERROR);
             return View(course);
         }
         public ActionResult Delete(int? id)
@@ -83,6 +88,7 @@ namespace FPT_Training_4._0.Controllers
             CourseType course = db.courseTypes.Find(id);
             db.courseTypes.Remove(course);
             db.SaveChanges();
+            this.AddNotification("Delete Success", NotificationType.SUCCESS);
             return RedirectToAction("Index");
         }
         protected override void Dispose(bool disposing)
