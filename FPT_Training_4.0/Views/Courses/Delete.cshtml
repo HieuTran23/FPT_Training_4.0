@@ -1,8 +1,12 @@
-﻿@model FPT_Training_4._0.Models.CourseType
+﻿@model FPT_Training_4._0.Models.Course
+
 @{
     ViewBag.Title = "Delete";
     Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
 }
+
+<h2>Delete</h2>
+
 <div class="page-header">
     <div class="row">
         <div class="col-md-6 col-sm-12">
@@ -23,11 +27,19 @@
     <div>
         <dl class="dl-horizontal">
             <dt>
-                @Html.DisplayNameFor(model => model.TypeName)
+                @Html.DisplayNameFor(model => model.Name)
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.TypeName)
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TypeCourse)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TypeCourse)
             </dd>
 
             <dt>
@@ -47,6 +59,7 @@
             </dd>
 
         </dl>
+
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()

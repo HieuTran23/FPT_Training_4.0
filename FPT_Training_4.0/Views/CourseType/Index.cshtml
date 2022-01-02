@@ -5,6 +5,23 @@
     Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
 }
 
+
+<div class="page-header">
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="title">
+                <h4>Course Type</h4>
+            </div>
+            <nav aria-label="breadcrumb" role="navigation">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Admin")">Dashboard</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">@ViewBag.Title</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
 <div class="card-box mb-30">
     <div class="pd-20">
         <h4 class="text-blue h4">Course Type</h4>

@@ -223,10 +223,11 @@
                     </li>
                     <li class="dropdown">
                         <a href="javascript:;" class="dropdown-toggle">
-                            <span class="micon dw dw-edit2"></span><span class="mtext">Types</span>
+                            <span class="micon dw dw-edit2"></span><span class="mtext">Course</span>
                         </a>
                         <ul class="submenu">
-                            <li>@Html.ActionLink("Course Type","Index","CourseType")</li>
+                            <li><a href="@Url.Action("Index", "CourseType")">Users</a></li>
+                            <li><a href="@Url.Action("Index", "Course")">User roles</a></li>
                         </ul>
                     </li>
                 </ul>

@@ -18,5 +18,7 @@ namespace FPT_Training_4._0.Models
             return new ApplicationDbContext();
         }
         public DbSet<CourseType> courseTypes { get; set;}
+
+        public System.Data.Entity.DbSet<FPT_Training_4._0.Models.Course> Courses { get; set; }
     }
 }
