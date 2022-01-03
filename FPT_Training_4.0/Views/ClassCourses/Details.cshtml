@@ -5,55 +5,89 @@
     Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
 }
 
-<h2>Details</h2>
 
-<div>
-    <h4>ClassCourse</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ClassName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ClassName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DateFrom)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DateFrom)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DateTo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DateTo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CreateDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreateDate)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+<div class="page-header">
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="title">
+                <h4>Class</h4>
+            </div>
+            <nav aria-label="breadcrumb" role="navigation">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Admin")">Dashboard</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">@ViewBag.Title</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
     @Html.ActionLink("Back to List", "Index")
-</p>
+</div>
+<div class="pd-20 bg-white border-radius-4 box-shadow mb-30">
+    <div>
+
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ClassName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ClassName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DateFrom)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DateFrom)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DateTo)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DateTo)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Course)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Course)
+            </dd>
+
+            <dt>
+                @Html.DisplayName("Trainer")
+            </dt>
+
+            <dd>
+                @ViewBag.trainer_name
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CreateDate)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</div>
+
+

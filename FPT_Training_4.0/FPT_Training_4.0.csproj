@@ -202,6 +202,10 @@
     <Compile Include="Migrations\202201030357402_ClassCourse.Designer.cs">
       <DependentUpon>202201030357402_ClassCourse.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202201030843054_ClassCourseFix.cs" />
+    <Compile Include="Migrations\202201030843054_ClassCourseFix.Designer.cs">
+      <DependentUpon>202201030843054_ClassCourseFix.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -842,7 +846,7 @@
     <Content Include="Views\Manage\SetPassword.cshtml" />
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
-    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\_AdminLoginPartial.cshtml" />
     <Content Include="Template\MasterAdmin\.github\workflows\npm-publish.yml" />
     <Content Include="Template\MasterAdmin\.gitignore" />
     <Content Include="Template\MasterAdmin\CODE_OF_CONDUCT.md" />
@@ -960,6 +964,7 @@
     <Content Include="Views\ClassCourses\Index.cshtml" />
     <Content Include="Views\Shared\_TrainerSelectPartial.cshtml" />
     <Content Include="Views\ApplicationUsers\SelectTrainer.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -992,6 +997,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202201030357402_ClassCourse.resx">
       <DependentUpon>202201030357402_ClassCourse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201030843054_ClassCourseFix.resx">
+      <DependentUpon>202201030843054_ClassCourseFix.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

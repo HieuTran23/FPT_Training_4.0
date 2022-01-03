@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using FPT_Training_4._0.Extensions;
+using FPT_Training_4._0.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using FPT_Training_4._0.Models;
 
 namespace FPT_Training_4._0.Controllers
 {
@@ -28,17 +25,22 @@ namespace FPT_Training_4._0.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             ClassCourse classCourse = db.ClassCourse.Find(id);
+            string query = "Select dbo.AspNetUsers.FullName from dbo.AspNetUsers,dbo.ClassCourses where (dbo.AspNetUsers.Id = dbo.ClassCourses.Trainer_Id) AND (dbo.ClassCourses.Id = " + id.Value + ")";
+            var queryResult = db.Database.SqlQuery<string>(query);
+            string name = queryResult.FirstOrDefault();
+            if (name == null) name = "Not Assigned";
             if (classCourse == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.trainer_name = name;
             return View(classCourse);
         }
 
         // GET: ClassCourses/Create
         public ActionResult Create()
         {
-            ViewBag.Course = new SelectList(db.Courses.ToList(), "Id", "Name");
+            ViewBag.Course = new SelectList(db.Courses.ToList(), "Name", "Name");
             return View();
         }
 
@@ -46,7 +48,7 @@ namespace FPT_Training_4._0.Controllers
         {
             ViewBag.trainer_id = trainer_id;
             ViewBag.trainer_name = trainer_name;
-            ViewBag.Course = new SelectList(db.Courses.ToList(), "Id", "Name");
+            ViewBag.Course = new SelectList(db.Courses.ToList(), "Name", "Name");
             return View("Create");
         }
 
@@ -55,7 +57,7 @@ namespace FPT_Training_4._0.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(string classTrainerId,[Bind(Include = "Id,ClassName,Description,DateFrom,DateTo, CourseId")] ClassCourse classCourse)
+        public ActionResult Create(string classTrainerId,[Bind(Include = "Id,ClassName,Description,DateFrom,DateTo, Course")] ClassCourse classCourse)
         {
             if (ModelState.IsValid)
             {
@@ -64,9 +66,11 @@ namespace FPT_Training_4._0.Controllers
                     classCourse.Trainer = trainer;
                 db.ClassCourse.Add(classCourse);
                 db.SaveChanges();
+                this.AddNotification("Create Success", NotificationType.SUCCESS);
                 return RedirectToAction("Index");
             }
-            ViewBag.Course = new SelectList(db.Courses.ToList(), "Id", "Name");
+            ViewBag.Course = new SelectList(db.Courses.ToList(), "Name", "Name");
+            this.AddNotification("Create Fail", NotificationType.ERROR);
             return View(classCourse);
         }
 
@@ -82,6 +86,7 @@ namespace FPT_Training_4._0.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Course = new SelectList(db.Courses.ToList(), "Name", "Name");
             return View(classCourse);
         }
 
@@ -90,14 +95,20 @@ namespace FPT_Training_4._0.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,ClassName,Description,DateFrom,DateTo,CreateDate")] ClassCourse classCourse)
+        public ActionResult Edit(string classTrainerId, [Bind(Include = "Id,ClassName,Description,DateFrom,DateTo,CreateDate, Course")] ClassCourse classCourse)
         {
             if (ModelState.IsValid)
             {
+                var trainer = db.Users.Find(classTrainerId);
+                if (trainer != null)
+                    classCourse.Trainer = trainer;
                 db.Entry(classCourse).State = EntityState.Modified;
                 db.SaveChanges();
+                ViewBag.Course = new SelectList(db.Courses.ToList(), "Name", "Name");
+                this.AddNotification("Edit Success", NotificationType.SUCCESS);
                 return RedirectToAction("Index");
             }
+            this.AddNotification("Edit Fail", NotificationType.ERROR);
             return View(classCourse);
         }
 
@@ -109,10 +120,15 @@ namespace FPT_Training_4._0.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             ClassCourse classCourse = db.ClassCourse.Find(id);
+            string query = "Select dbo.AspNetUsers.FullName from dbo.AspNetUsers,dbo.ClassCourses where (dbo.AspNetUsers.Id = dbo.ClassCourses.Trainer_Id) AND (dbo.ClassCourses.Id = " + id.Value + ")";
+            var queryResult = db.Database.SqlQuery<string>(query);
+            string name = queryResult.FirstOrDefault();
+            if (name == null) name = "Not Assigned";
             if (classCourse == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.trainer_name = name;
             return View(classCourse);
         }
 
@@ -124,6 +140,7 @@ namespace FPT_Training_4._0.Controllers
             ClassCourse classCourse = db.ClassCourse.Find(id);
             db.ClassCourse.Remove(classCourse);
             db.SaveChanges();
+            this.AddNotification("Delete Success", NotificationType.SUCCESS);
             return RedirectToAction("Index");
         }
 

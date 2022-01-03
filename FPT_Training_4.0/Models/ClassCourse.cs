@@ -52,6 +52,6 @@ namespace FPT_Training_4._0.Models
 
         public virtual ICollection<UserClass> UserClass { get; set; }
 
-        public Course Course { get; set; }
+        public string Course { get; set; }
     }
 }

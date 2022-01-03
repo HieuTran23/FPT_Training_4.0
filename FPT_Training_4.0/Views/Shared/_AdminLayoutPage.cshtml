@@ -102,19 +102,7 @@
                     </a>
                 </div>
             </div>
-            <div class="user-info-dropdown" style="display:flex; align-items:center">
-                <div class="dropdown">
-                    <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                        <span class="user-name">User Name</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                        <a class="dropdown-item" href="profile.html"><i class="dw dw-user1"></i> Profile</a>
-                        <a class="dropdown-item" href="profile.html"><i class="dw dw-settings2"></i> Setting</a>
-                        <a class="dropdown-item" href="faq.html"><i class="dw dw-help"></i> Help</a>
-                        <a class="dropdown-item" href="login.html"><i class="dw dw-logout"></i> Log Out</a>
-                    </div>
-                </div>
-            </div>
+            @Html.Partial("_AdminLoginPartial")
             <div class="col-1"></div>
         </div>
     </div>
@@ -230,6 +218,11 @@
                             <li><a href="@Url.Action("Index", "Courses")">Course</a></li>
                         </ul>
                     </li>
+                    <li>
+                        <a href="@Url.Action("Index", "ClassCourses")" class="dropdown-toggle no-arrow">
+                            <span class="micon dw dw-panel"></span><span class="mtext">Class</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -241,6 +234,8 @@
             @RenderBody()
         </div>
     </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
     <!-- js -->
     <script src="~/Template/MasterAdmin/vendors/scripts/core.js"></script>
     <script src="~/Template/MasterAdmin/vendors/scripts/script.min.js"></script>
@@ -252,6 +247,7 @@
     <script src="~/Template/MasterAdmin/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
     <script src="~/Template/MasterAdmin/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
     <script src="~/Template/MasterAdmin/vendors/scripts/dashboard.js"></script>
+
     @RenderSection("scripts", required: false)
 </body>
 </html>

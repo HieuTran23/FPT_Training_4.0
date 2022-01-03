@@ -1,0 +1,33 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "user-info-dropdown", style = "display:flex; align-items:center" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="dropdown">
+            <a class="dropdown-toggle" role="button" data-toggle="dropdown">
+                @Html.DisplayName(User.Identity.GetUserName())
+            </a>
+            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                <a class="dropdown-item" title = "Manage" href="@Url.Action("Index","Manage", routeValues: null)"><i class="dw dw-settings2"></i> Manage</a>
+                <a class="dropdown-item" href="faq.html"><i class="dw dw-help"></i> Help</a>
+                <a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()"><i class="dw dw-logout"></i> Log Out</a>
+            </div>
+        </div>
+    }
+}
+else
+{
+        <div class="user-info-dropdown" style="display:flex; align-items:center">
+            <div class="dropdown">
+                <a class="dropdown-toggle" role="button" data-toggle="dropdown">
+                    <span class="user-name">Account</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                    <a class="dropdown-item" href="@Url.Action("Login","Account", routeValues:null)" id="loginLink"><i class="dw dw-login"></i> Login</a>
+                </div>
+            </div>
+        </div>
+}
+
