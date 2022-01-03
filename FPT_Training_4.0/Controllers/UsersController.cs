@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace FPT_Training_4._0.Controllers
 {
+    [Authorize(Roles = "Admin,Training Staff")]
     public class UsersController : Controller
     {
         // GET: Users

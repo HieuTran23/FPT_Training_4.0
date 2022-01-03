@@ -7,10 +7,12 @@ using System.Web.Mvc;
 
 namespace FPT_Training_4._0.Controllers
 {
+    [Authorize(Roles = "Admin,Training Staff")]
     public class AdminController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         // GET: Admin
+        
         public ActionResult Index()
         {
             var accountNumber = db.Users.ToList().Count().ToString();

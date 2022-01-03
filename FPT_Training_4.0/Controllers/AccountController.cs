@@ -82,10 +82,25 @@ namespace FPT_Training_4._0.Controllers
             // This doesn't count login failures towards account lockout    
             // To enable password failures to trigger account lockout, change to shouldLockout: true    
             var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
+            
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    var user = await UserManager.FindAsync(model.UserName, model.Password);
+                    var roles = await UserManager.GetRolesAsync(user.Id);
+
+                    if (roles.Contains("Training Staff"))
+                    {
+                        return RedirectToAction("Index", "Admin");
+                    }
+                    else if (roles.Contains("Admin"))
+                    {
+                        return RedirectToAction("Index", "Admin");
+                    }
+                    else
+                    {
+                        return RedirectToLocal(returnUrl);
+                    }
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -95,6 +110,46 @@ namespace FPT_Training_4._0.Controllers
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);
             }
+        }
+        //Check admin and training staff
+        public Boolean isAdminUser()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = User.Identity;
+                ApplicationDbContext context = new ApplicationDbContext();
+                var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+                var s = UserManager.GetRoles(user.GetUserId());
+                if (s[0].ToString() == "Admin")
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return false;
+        }
+
+        public Boolean isTrainingStaff()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = User.Identity;
+                ApplicationDbContext context = new ApplicationDbContext();
+                var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+                var s = UserManager.GetRoles(user.GetUserId());
+                if (s[0].ToString() == "Training Staff")
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return false;
         }
 
         //    
@@ -142,6 +197,7 @@ namespace FPT_Training_4._0.Controllers
 
         //
         // GET: /Account/Register    
+        /*
         [AllowAnonymous]
         public ActionResult Register()
         {
@@ -183,10 +239,12 @@ namespace FPT_Training_4._0.Controllers
             // If we got this far, something failed, redisplay form    
             return View(model);
         }
-
+        */
         //
         // GET: /Account/Create
+        
         [AllowAnonymous]
+        [Authorize(Roles = "Admin,Training Staff")]
         public ActionResult Create()
         {
             ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin"))
@@ -199,6 +257,7 @@ namespace FPT_Training_4._0.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Training Staff")]
         public async Task<ActionResult> Create(RegisterViewModel model)
         {
             if (ModelState.IsValid)
@@ -225,6 +284,7 @@ namespace FPT_Training_4._0.Controllers
 
         //
         //GET: /Account/Detail Account
+        [Authorize(Roles = "Admin,Training Staff")]
         public ActionResult DetailAccount(string email)
         {
             if (email == null)
@@ -244,6 +304,7 @@ namespace FPT_Training_4._0.Controllers
             return View(user);
         }
 
+        [Authorize(Roles = "Admin,Training Staff")]
         //GET: /Account/Edit User
         public ActionResult EditUser(string email)
         {
@@ -267,7 +328,9 @@ namespace FPT_Training_4._0.Controllers
         }
 
         //POST:/Account/Edit User
+
         [HttpPost]
+        [Authorize(Roles = "Admin,Training Staff")]
         public async Task<ActionResult> EditUser(UserEdit model)
         {
 
@@ -297,6 +360,7 @@ namespace FPT_Training_4._0.Controllers
         }
 
         //GET: /Account/Delete/
+        [Authorize(Roles = "Admin,Training Staff")]
         public ActionResult DeleteUser(string id)
         {
             if (id == null)

@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace FPT_Training_4._0.Controllers
 {
+
     public class ManageUserController : Controller
     {
         ApplicationDbContext context;

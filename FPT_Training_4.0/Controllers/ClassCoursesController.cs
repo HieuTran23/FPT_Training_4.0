@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace FPT_Training_4._0.Controllers
 {
+
     public class ClassCoursesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -18,6 +19,7 @@ namespace FPT_Training_4._0.Controllers
         }
 
         // GET: ClassCourses/Details/5
+        [Authorize(Roles = "Admin,Training Staff")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -58,12 +60,14 @@ namespace FPT_Training_4._0.Controllers
         }
 
         // GET: ClassCourses/Create
+        [Authorize(Roles = "Admin,Training Staff")]
         public ActionResult Create()
         {
             ViewBag.Course = new SelectList(db.Courses.ToList(), "Name", "Name");
             return View();
         }
 
+        [Authorize(Roles = "Admin,Training Staff")]
         public ActionResult CreateWithTrainer(string trainer_id, string trainer_name)
         {
             ViewBag.trainer_id = trainer_id;
@@ -77,6 +81,7 @@ namespace FPT_Training_4._0.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Training Staff")]
         public ActionResult Create(string classTrainerId,[Bind(Include = "Id,ClassName,Description,DateFrom,DateTo, Course")] ClassCourse classCourse)
         {
             if (ModelState.IsValid)
@@ -95,6 +100,7 @@ namespace FPT_Training_4._0.Controllers
         }
 
         // GET: ClassCourses/Edit/5
+        [Authorize(Roles = "Admin,Training Staff")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -115,6 +121,7 @@ namespace FPT_Training_4._0.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Training Staff")]
         public ActionResult Edit(string classTrainerId, [Bind(Include = "Id,ClassName,Description,DateFrom,DateTo,CreateDate, Course")] ClassCourse classCourse)
         {
             if (ModelState.IsValid)
@@ -133,6 +140,7 @@ namespace FPT_Training_4._0.Controllers
         }
 
         // GET: ClassCourses/Delete/5
+        [Authorize(Roles = "Admin,Training Staff")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -153,6 +161,7 @@ namespace FPT_Training_4._0.Controllers
         }
 
         // POST: ClassCourses/Delete/5
+        [Authorize(Roles = "Admin,Training Staff")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

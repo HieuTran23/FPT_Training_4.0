@@ -11,6 +11,7 @@ using FPT_Training_4._0.Models;
 
 namespace FPT_Training_4._0.Controllers
 {
+    [Authorize(Roles = "Admin,Training Staff")]
     public class CoursesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
