@@ -20,5 +20,9 @@ namespace FPT_Training_4._0.Models
         public DbSet<CourseType> courseTypes { get; set;}
 
         public System.Data.Entity.DbSet<FPT_Training_4._0.Models.Course> Courses { get; set; }
+
+        public System.Data.Entity.DbSet<FPT_Training_4._0.Models.UserClass> UserClass { get; set; }
+
+        public System.Data.Entity.DbSet<FPT_Training_4._0.Models.ClassCourse> ClassCourse { get; set; }
     }
 }

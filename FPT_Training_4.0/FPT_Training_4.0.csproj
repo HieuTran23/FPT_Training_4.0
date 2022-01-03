@@ -169,6 +169,8 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\ApplicationUsersController.cs" />
+    <Compile Include="Controllers\ClassCoursesController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\CourseTypeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -196,12 +198,17 @@
     <Compile Include="Migrations\202201020727395_Course.Designer.cs">
       <DependentUpon>202201020727395_Course.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202201030357402_ClassCourse.cs" />
+    <Compile Include="Migrations\202201030357402_ClassCourse.Designer.cs">
+      <DependentUpon>202201030357402_ClassCourse.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
+    <Compile Include="Models\ClassCourse.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\CourseType.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -226,11 +233,14 @@
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="SQLQuery1.sql" />
     <Content Include="Template\MasterAdmin\400.html" />
     <Content Include="Template\MasterAdmin\403.html" />
     <Content Include="Template\MasterAdmin\404.html" />
@@ -943,6 +953,13 @@
     <Content Include="Views\Courses\Edit.cshtml" />
     <Content Include="Views\Courses\Index.cshtml" />
     <Content Include="Views\Shared\_Notifications.cshtml" />
+    <Content Include="Views\ClassCourses\Create.cshtml" />
+    <Content Include="Views\ClassCourses\Delete.cshtml" />
+    <Content Include="Views\ClassCourses\Details.cshtml" />
+    <Content Include="Views\ClassCourses\Edit.cshtml" />
+    <Content Include="Views\ClassCourses\Index.cshtml" />
+    <Content Include="Views\Shared\_TrainerSelectPartial.cshtml" />
+    <Content Include="Views\ApplicationUsers\SelectTrainer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -972,6 +989,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202201020727395_Course.resx">
       <DependentUpon>202201020727395_Course.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201030357402_ClassCourse.resx">
+      <DependentUpon>202201030357402_ClassCourse.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

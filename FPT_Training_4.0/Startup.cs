@@ -52,29 +52,38 @@ namespace FPT_Training_4._0
             }
 
             // creating Creating Training Staff role     
-            if (!roleManager.RoleExists("Training Staff"))
+            if (!roleManager.RoleExists("User"))
             {
                 var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "Training Staff";
+                role.Name = "User";
                 roleManager.Create(role);
 
             }
 
-            // creating Creating Trainer role     
-            if (!roleManager.RoleExists("Trainer"))
-            {
-                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "Trainer";
-                roleManager.Create(role);
-            }
+            //// creating Creating Training Staff role     
+            //if (!roleManager.RoleExists("Training Staff"))
+            //{
+            //    var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+            //    role.Name = "Training Staff";
+            //    roleManager.Create(role);
 
-            // creating Creating Trainee role     
-            if (!roleManager.RoleExists("Trainee"))
-            {
-                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "Trainee";
-                roleManager.Create(role);
-            }
+            //}
+
+            //// creating Creating Trainer role     
+            //if (!roleManager.RoleExists("Trainer"))
+            //{
+            //    var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+            //    role.Name = "Trainer";
+            //    roleManager.Create(role);
+            //}
+
+            //// creating Creating Trainee role     
+            //if (!roleManager.RoleExists("Trainee"))
+            //{
+            //    var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+            //    role.Name = "Trainee";
+            //    roleManager.Create(role);
+            //}
         }
     }
 }
