@@ -37,6 +37,26 @@ namespace FPT_Training_4._0.Controllers
             return View(classCourse);
         }
 
+        // For user
+        public ActionResult ClassDetails(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ClassCourse classCourse = db.ClassCourse.Find(id);
+            string query = "Select dbo.AspNetUsers.FullName from dbo.AspNetUsers,dbo.ClassCourses where (dbo.AspNetUsers.Id = dbo.ClassCourses.Trainer_Id) AND (dbo.ClassCourses.Id = " + id.Value + ")";
+            var queryResult = db.Database.SqlQuery<string>(query);
+            string name = queryResult.FirstOrDefault();
+            if (name == null) name = "Not Assigned";
+            if (classCourse == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.trainer_name = name;
+            return View(classCourse);
+        }
+
         // GET: ClassCourses/Create
         public ActionResult Create()
         {

@@ -965,6 +965,7 @@
     <Content Include="Views\Shared\_TrainerSelectPartial.cshtml" />
     <Content Include="Views\ApplicationUsers\SelectTrainer.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\ClassCourses\ClassDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
